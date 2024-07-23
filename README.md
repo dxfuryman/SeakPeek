@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# SneakPeek
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SneakPeek is a dynamic social media application where users can post photos, text, and create accounts tailored to their needs. Built with modern web technologies, SneakPeek aims to provide a seamless and engaging user experience.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **User Accounts**: Create and manage user profiles.
+- **Photo and Text Posts**: Share your moments through photos and text updates.
+- **Responsive Design**: Enjoy a consistent experience across devices.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React.js**: For building the user interface.
+- **TanStack Query**: For efficient data fetching and state management.
+- **Tailwind CSS**: For styling the application with ease.
+- **TypeScript**: For type safety and better developer experience.
+- **React Router**: For handling routing within the application.
+- **Appwrite**: For backend services like database, authentication, and storage.
+- **Shadcn**: For providing reusable components and utilities.
+- **NextUI**: For a modern, beautiful UI component library.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-username/SneakPeek.git
+    ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. **Install dependencies**:
+    ```bash
+    cd SneakPeek
+    npm install
+    ```
+
+3. **Run the application**:
+    ```bash
+    npm start
+    ```
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) to learn how you can help.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
