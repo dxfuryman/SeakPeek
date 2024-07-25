@@ -61,9 +61,9 @@
 
 @layer base {
   * {
-    @apply tailwind.config.jsborder-border;
+    @apply border-border;
   }
   body {
-    @apply tailwind.config.jsbg-background tailwind.config.jstext-foreground;
+    @apply bg-background text-foreground;
   }
 }
