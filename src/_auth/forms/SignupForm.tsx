@@ -28,8 +28,8 @@ const SignupForm = () => {
     });
 
     // 2. Define a submit handler.
-    const onSubmit = (values: z.infer<typeof SignupValidation>) => {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof SignupValidation>){
+    // const newUser = await createUserAccount(values);
     };
 
     return (
@@ -44,6 +44,7 @@ const SignupForm = () => {
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
                     <FormField
                         control={form.control}
                         name="username"
