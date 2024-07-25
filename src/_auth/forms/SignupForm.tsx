@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import{Link} from "react-router-dom";
 import {
     Form,
     FormControl,
@@ -12,9 +13,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SignupValidation from "@/lib/validation";
+import Loader from "@/components/shared/Loader.tsx";
 
 const SignupForm = () => {
-    const isLoading =true;
+    const isLoading =false;
     // 1. Define your form.
     const form = useForm<z.infer<typeof SignupValidation>>({
         resolver: zodResolver(SignupValidation),
@@ -36,7 +38,7 @@ const SignupForm = () => {
                 <img src="/assets/images/logo.svg" alt="logo" className="w-32 h-auto" />
                 <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Create a new account</h2>
                 <p className="text-light-3 small-medium md:base-regular mt-4 text-center">
-                    To use SneakPeek enter your account details
+                    To use SneakPeek, please enter your account details
                 </p>
             </div>
 
@@ -95,10 +97,14 @@ const SignupForm = () => {
                     <Button type="submit" className="w-full shad-button_primary">
                         {isLoading ? (
                             <div className="flex-center gap-2">
-                                Loading...
+                                <Loader/> Loading...
                             </div>
                         ):"Sign up"}
                     </Button>
+                    <p className="text-small-regular text-light-2 text-center mt-2">
+                        Already have an account?
+                        <Link to="/sign-in" className="text-primary-500 text-small-semibold ml-1">Log in</Link>
+                    </p>
                 </form>
             </Form>
         </div>
