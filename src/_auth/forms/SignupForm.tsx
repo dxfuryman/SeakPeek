@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import { Button } from "@/components/ui/button";
 import {
     Form,
@@ -20,6 +19,8 @@ const SignupForm = () => {
         resolver: zodResolver(SignupValidation),
         defaultValues: {
             username: "",
+            email: "",
+            password: "",
         },
     });
 
@@ -29,9 +30,12 @@ const SignupForm = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto">
+        <div className="max-w-md mx-auto mt-8">
+            <div className="flex justify-center mb-8">
+                <img src="/assets/images/logo.svg" alt="logo" className="w-32 h-auto"/>
+            </div>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <FormField
                         control={form.control}
                         name="username"
@@ -39,7 +43,7 @@ const SignupForm = () => {
                             <FormItem>
                                 <FormLabel>Username</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="shadcn" {...field} />
+                                    <Input placeholder="Username" {...field} />
                                 </FormControl>
                                 <FormDescription>
                                     This is your public display name.
@@ -48,7 +52,36 @@ const SignupForm = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Email" {...field} />
+                                </FormControl>
+                                <FormDescription>
+                                    We’ll never share your email with anyone else.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input type="password" placeholder="Password" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit" className="w-full">Sign Up</Button>
                 </form>
             </Form>
         </div>

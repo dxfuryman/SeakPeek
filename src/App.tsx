@@ -9,7 +9,7 @@ import { RootLayout } from "./_root/RootLayout.tsx";
 const App = () => {
     return (
         <main className="flex h-screen">
-            <p className="text-amber-50">hello testing</p>
+            {/*<p className="text-amber-50">hello testing</p>*/}
             <Routes>
                 {/*Public routes*/}
                 <Route element={<AuthLayout />}>
