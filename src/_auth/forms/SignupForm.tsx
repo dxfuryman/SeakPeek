@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import SignupValidation from "@/lib/validation";
 
 const SignupForm = () => {
+    const isLoading =true;
     // 1. Define your form.
     const form = useForm<z.infer<typeof SignupValidation>>({
         resolver: zodResolver(SignupValidation),
@@ -46,13 +47,23 @@ const SignupForm = () => {
                         name="username"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Username</FormLabel>
+                                {/*<FormLabel>Name</FormLabel>*/}
                                 <FormControl>
-                                    <Input placeholder="Username" {...field} />
+                                    <Input type="text" className="shad-input" placeholder="Name" {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    This is your public display name.
-                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="username"
+                        render={({ field }) => (
+                            <FormItem>
+                                {/*<FormLabel>Username</FormLabel>*/}
+                                <FormControl>
+                                    <Input type="username" className="shad-input" placeholder="Username" {...field} />
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -62,13 +73,9 @@ const SignupForm = () => {
                         name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Email" {...field} />
+                                    <Input type="email" className="shad-input" placeholder="Email" {...field} />
                                 </FormControl>
-                                <FormDescription>
-                                    We’ll never share your email with anyone else.
-                                </FormDescription>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -78,15 +85,20 @@ const SignupForm = () => {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Password</FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder="Password" {...field} />
+                                    <Input type="password" className="shad-input" placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type="submit" className="w-full">Sign Up</Button>
+                    <Button type="submit" className="w-full shad-button_primary">
+                        {isLoading ? (
+                            <div className="flex-center gap-2">
+                                Loading...
+                            </div>
+                        ):"Sign up"}
+                    </Button>
                 </form>
             </Form>
         </div>
