@@ -1,5 +1,9 @@
+// noinspection TypeScriptCheckImport
+
 import './globals.css';
-import { Route, Routes } from "react-router-dom";
+import {
+    Route, Routes
+} from "react-router-dom";
 import SigninForm from "./_auth/forms/SigninForm.tsx";
 import { Home } from "./_root/pages";
 import SignupForm from "./_auth/forms/SignupForm.tsx";
