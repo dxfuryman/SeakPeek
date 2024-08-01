@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import{Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Form,
     FormControl,
@@ -13,10 +13,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SignupValidation from "@/lib/validation";
-import Loader from "@/components/shared/Loader.tsx";
+import Loader from "@/components/shared/Loader";
+import { createUserAccount } from "@/lib/appwrite/api";
+import { z } from "zod"; // Make sure to import 'z' from 'zod'
 
 const SignupForm = () => {
-    const isLoading =false;
+    const isLoading = false;
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof SignupValidation>>({
         resolver: zodResolver(SignupValidation),
@@ -28,9 +31,14 @@ const SignupForm = () => {
     });
 
     // 2. Define a submit handler.
-    async function onSubmit(values: z.infer<typeof SignupValidation>){
-    // const newUser = await createUserAccount(values);
-    };
+    async function onSubmit(values: z.infer<typeof SignupValidation>) {
+        try {
+            const newUser = await createUserAccount(values);
+            console.log(newUser);
+        } catch (error) {
+            console.error("Error creating account:", error);
+        }
+    }
 
     return (
         <div className="max-w-md mx-auto mt-8">
@@ -44,28 +52,13 @@ const SignupForm = () => {
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-
                     <FormField
                         control={form.control}
                         name="username"
                         render={({ field }) => (
                             <FormItem>
-                                {/*<FormLabel>Name</FormLabel>*/}
                                 <FormControl>
-                                    <Input type="text" className="shad-input" placeholder="Name" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                            <FormItem>
-                                {/*<FormLabel>Username</FormLabel>*/}
-                                <FormControl>
-                                    <Input type="username" className="shad-input" placeholder="Username" {...field} />
+                                    <Input type="text" className="shad-input" placeholder="Username" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -98,9 +91,9 @@ const SignupForm = () => {
                     <Button type="submit" className="w-full shad-button_primary">
                         {isLoading ? (
                             <div className="flex-center gap-2">
-                                <Loader/> Loading...
+                                <Loader /> Loading...
                             </div>
-                        ):"Sign up"}
+                        ) : "Sign up"}
                     </Button>
                     <p className="text-small-regular text-light-2 text-center mt-2">
                         Already have an account?
