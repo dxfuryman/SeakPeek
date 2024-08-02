@@ -14,6 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import SignupValidation from "@/lib/validation";
 import Loader from "@/components/shared/Loader.tsx";
+import {createUserAccount} from "@/lib/appwrite/api.ts";
+import {z} from "zod";
+import {INewUser} from "@/types";
 
 const SignupForm = () => {
     const isLoading =false;
@@ -21,6 +24,7 @@ const SignupForm = () => {
     const form = useForm<z.infer<typeof SignupValidation>>({
         resolver: zodResolver(SignupValidation),
         defaultValues: {
+            name: "",
             username: "",
             email: "",
             password: "",
@@ -29,7 +33,9 @@ const SignupForm = () => {
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof SignupValidation>){
-    // const newUser = await createUserAccount(values);
+
+    const newUser = await createUserAccount(values as INewUser);
+    console.log(newUser);
     };
 
     return (
@@ -47,7 +53,7 @@ const SignupForm = () => {
 
                     <FormField
                         control={form.control}
-                        name="username"
+                        name="name"
                         render={({ field }) => (
                             <FormItem>
                                 {/*<FormLabel>Name</FormLabel>*/}
