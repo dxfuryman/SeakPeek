@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useToast } from "@/components/ui/use-toast"
 import { Button } from "@/components/ui/button";
 import{Link} from "react-router-dom";
 import {
@@ -17,9 +18,16 @@ import Loader from "@/components/shared/Loader.tsx";
 import {createUserAccount} from "@/lib/appwrite/api.ts";
 import {z} from "zod";
 import {INewUser} from "@/types";
+import {useCreateUserAccount , useSignInAccount} from "@/lib/react-query/queriesAndMutations.ts";
 
 const SignupForm = () => {
+    const { toast } = useToast();
     const isLoading =false;
+
+    const{ mutateAsync: createUserAccount , isLoading: isCreatingUser} = useCreateUserAccount();
+
+    const {mutateAsync : signInAccount, isLoading: isSigningIn} = useSignInAccount();
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof SignupValidation>>({
         resolver: zodResolver(SignupValidation),
@@ -29,14 +37,21 @@ const SignupForm = () => {
             email: "",
             password: "",
         },
-    });
+    })
+
 
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof SignupValidation>){
 
     const newUser = await createUserAccount(values as INewUser);
-    console.log(newUser);
-    };
+    if (!newUser){
+        return toast({title: "Sign up failed, Please try again."});
+    }
+    const session = await signInAccount({
+        email: values.email,
+        password: values.password,
+    })
+    }
 
     return (
         <div className="max-w-md mx-auto mt-8">
