@@ -54,6 +54,8 @@ const SignupForm = () => {
         if (!session){
             return toast({title: 'Sign in failed. Please try again.'})
         }
+
+
     }
 
     return (
